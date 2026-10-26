@@ -296,7 +296,9 @@ def verify(source, target, replacements):
                 remaining -= count
 
 
-def install(source_app, output_root, log=print):
+def install(source_app, output_root, log=None):
+    if log is None:
+        log = lambda message: None
     source_app, output_root = Path(source_app).resolve(), Path(output_root).resolve()
     source_archive = source_app / "resources" / "app.asar"
     if output_root == source_app or source_app in output_root.parents:

@@ -1,4 +1,6 @@
 from pathlib import Path
+from contextlib import redirect_stdout
+import io
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -65,6 +67,10 @@ class ServiceTests(unittest.TestCase):
                 patch("codex_zh_helper.processes.resolve_entry", return_value=Path("ChatGPT.exe")),
                 patch.object(localizer, "plan") as scan,
             ):
-                result, _ = localizer.install(source, output)
+                # Windows CI can use a non-Chinese console encoding. Library
+                # work must not fail merely because no logger was supplied.
+                console = io.TextIOWrapper(io.BytesIO(), encoding="cp1252")
+                with redirect_stdout(console):
+                    result, _ = localizer.install(source, output)
                 self.assertEqual(result, root.resolve())
                 scan.assert_not_called()
