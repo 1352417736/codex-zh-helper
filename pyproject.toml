@@ -21,6 +21,9 @@ codex-zh-helper = "codex_zh_helper.app:main"
 [tool.setuptools.packages.find]
 include = ["codex_zh_helper*"]
 
+[tool.setuptools.package-data]
+codex_zh_helper = ["assets/*.png", "assets/*.ico"]
+
 [tool.ruff]
 line-length = 110
 

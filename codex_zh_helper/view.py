@@ -1,6 +1,7 @@
 """Tk widgets and visual styles; no filesystem or process operations."""
 
 import tkinter as tk
+from pathlib import Path
 from tkinter import scrolledtext, ttk
 
 BG = "#F3F6FA"
@@ -55,6 +56,11 @@ class View:
     def __init__(self, root, callbacks):
         self.root = root
         root.title("Codex 中文助手")
+        assets = Path(__file__).parent / "assets"
+        self.icon = tk.PhotoImage(master=root, file=str(assets / "app.png"))
+        root.iconphoto(True, self.icon)
+        if root.tk.call("tk", "windowingsystem") == "win32":
+            root.iconbitmap(str(assets / "app.ico"))
         root.geometry("1080x800")
         root.minsize(1000, 740)
         root.configure(bg=BG)

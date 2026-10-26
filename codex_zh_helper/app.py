@@ -138,6 +138,7 @@ def main():
         try:
             import ctypes
 
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("CodexZhHelper.Desktop")
             ctypes.windll.shcore.SetProcessDpiAwareness(1)
         except (AttributeError, OSError):
             pass
