@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codex-zh-helper"
+version = "1.0.0"
+description = "Codex Windows 桌面版中文界面助手"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+classifiers = [
+  "Operating System :: Microsoft :: Windows",
+  "Programming Language :: Python :: 3",
+  "Topic :: Desktop Environment",
+]
+
+[project.gui-scripts]
+codex-zh-helper = "codex_zh_helper.app:main"
+
+[tool.setuptools.packages.find]
+include = ["codex_zh_helper*"]
+
+[tool.ruff]
+line-length = 110
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82", "F401"]
